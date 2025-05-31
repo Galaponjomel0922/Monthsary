@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo's Journal With Her</title>
+  <style>
+    body {
+      background-image: url('https://t3.ftcdn.net/jpg/11/55/81/42/360_F_1155814221_IJ608BEsA3nPu24Bj6zy0L54sUgBfFYG.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 40px;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    .album {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .photo-frame {
+      border: 4px solid #fff;
+      border-radius: 12px;
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    /* Zoom on hover */
+    .photo-frame:hover img {
+      transform: scale(1.05);
+      transition: transform 0.3s ease;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      display: block;
+    }
+
+    /* Lightbox styles */
+    #lightbox-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      cursor: zoom-out;
+    }
+
+    #lightbox-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #fff;
+    }
+    .back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(182, 0, 0, 0.671);
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: rgb(230, 5, 114);
+}
+
+  </style>
+</head>
+<body>
+     <button class="back-button" onclick="history.back()">← Back</button>
+  <h1>Photo's Journal for December</h1>
+
+  <div class="album">
+    <div class="photo-frame"><img src="" alt="Photo 1"></div>
+    <div class="photo-frame"><img src="" alt="Photo 2"></div>
+    <div class="photo-frame"><img src="" alt="Photo 3"></div>
+    <div class="photo-frame"><img src="" alt="Photo 4"></div>
+    <div class="photo-frame"><img src="" alt="Photo 5"></div>
+    <div class="photo-frame"><img src="" alt="Photo 6"></div>
+    <div class="photo-frame"><img src="" alt="Photo 7"></div>
+    <div class="photo-frame"><img src="" alt="Photo 8"></div>
+    <div class="photo-frame"><img src="" alt="Photo 9"></div>
+    <div class="photo-frame"><img src="" alt="Photo 10"></div>
+  </div>
+
+  <!-- Lightbox Overlay -->
+  <div id="lightbox-overlay">
+    <img src="" alt="Zoomed Photo" />
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox-overlay');
+    const lightboxImage = lightbox.querySelector('img');
+    const photoFrames = document.querySelectorAll('.photo-frame img');
+
+    photoFrames.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImage.src = img.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    // Close lightbox on overlay click
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      lightboxImage.src = '';
+    });
+
+    // Optional: close lightbox on pressing Esc key
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && lightbox.style.display === 'flex') {
+        lightbox.style.display = 'none';
+        lightboxImage.src = '';
+      }
+    });
+  </script>
+</body>
+</html>
